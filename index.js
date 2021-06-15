@@ -4,6 +4,18 @@ import { graphqlHTTP } from 'express-graphql'
 
 const app = express();
 
+const friendDatabase = {}
+
+class Friend {
+    constructor(id, {firstName, lastName, gender, email}) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.email = email;
+    }
+}
+
 app.get('/', (req, res) => {
     res.send('graphql')
 })
@@ -15,11 +27,12 @@ const root = {
             "firstName": "Test",
             "lastName": "Testerson",
             "gender": "Male",
-            "email": [
-                { email: "test@test.com" },
-                { email: "me@test.com" }
-            ]
+            "email": "test@test.com"
         }
+    },
+    createFriend: ({input}) => {
+        let id = require('crypto').randomBytes(10).toString('hex');
+        return new Friend(id, input)
     }
 }
 
