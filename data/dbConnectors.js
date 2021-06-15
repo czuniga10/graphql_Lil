@@ -5,19 +5,19 @@ import casual from 'casual';
 
 // Mongo Connection
 mongoose.Promise = global.Promise;
-mongoose.connect('http://localhost:8081/db/friends', {
+mongoose.connect('mongodb://localhost/friends', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
 
 const friendSchema = new mongoose.Schema({
-    firstName: {String},
-    lastName: {String},
-    gender: {String},
-    age: {Number},
-    language: {String},
-    email: {String},
-    contacts: Array
+    firstName: {type: String},
+    lastName: {type: String},
+    gender: {type: String},
+    age: {type: Number},
+    language: {type: String},
+    email: {type: String},
+    contacts: {type:Array}
 })
 
 const Friends = mongoose.model('friends', friendSchema)
